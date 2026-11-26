@@ -6,20 +6,36 @@
     <title>{% block title %}Spendly{% endblock %}</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     {% block head %}{% endblock %}
 </head>
 <body>
 
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+        <defs>
+            <symbol id="spendly-logo" viewBox="0 0 48 48">
+                <path d="M24 2 L46 24 L24 46 L2 24 Z" fill="#0e8f68"/>
+                <path d="M24 2 L46 24 L24 24 Z" fill="#39c98f"/>
+                <path d="M2 24 L24 24 L24 46 Z" fill="#0a6e52"/>
+                <path d="M24 12 L36 24 L24 36 L12 24 Z" fill="#eafaf3"/>
+                <path d="M24 12 L36 24 L24 24 Z" fill="#b6f0d6"/>
+            </symbol>
+        </defs>
+    </svg>
+
     <nav class="navbar">
         <div class="nav-inner">
             <a href="{{ url_for('landing') }}" class="nav-brand">
-                <span class="brand-icon">◈</span>
+                <svg class="brand-logo" aria-hidden="true"><use href="#spendly-logo"/></svg>
                 <span class="brand-name">Spendly</span>
             </a>
             <div class="nav-links">
-                <a href="{{ url_for('login') }}">Sign in</a>
+                <a href="{{ url_for('landing') }}#features" class="nav-link">Features</a>
+                <a href="#" class="nav-link">Pricing</a>
+                <a href="#" class="nav-link">FAQ</a>
+                <span class="nav-divider" aria-hidden="true"></span>
+                <a href="{{ url_for('login') }}" class="nav-signin">Sign in</a>
                 <a href="{{ url_for('register') }}" class="nav-cta">Get started</a>
             </div>
         </div>
@@ -31,11 +47,15 @@
 
     <footer class="footer">
         <div class="footer-inner">
-            <span class="brand-icon">◈</span>
-            <span class="footer-name">Spendly</span>
+            <div class="footer-brand">
+                <svg class="brand-logo" aria-hidden="true"><use href="#spendly-logo"/></svg>
+                <span class="footer-name">Spendly</span>
+            </div>
             <p class="footer-copy">Track every rupee. Own your finances.</p>
-            <a href="{{ url_for('terms') }}">Terms and Conditions</a>
-            <a href="{{ url_for('privacy') }}">Privacy Policy</a>
+            <div class="footer-links">
+                <a href="{{ url_for('terms') }}">Terms and Conditions</a>
+                <a href="{{ url_for('privacy') }}">Privacy Policy</a>
+            </div>
         </div>
     </footer>
 
