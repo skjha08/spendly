@@ -418,3 +418,67 @@
     .hero-actions { gap: 1.25rem; }
     .iso-wrap { --s: 0.46; }
 }
+
+/* ------------------------------------------------------------------ */
+/* Video modal                                                         */
+/* ------------------------------------------------------------------ */
+
+.video-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    background: rgba(28, 34, 48, 0.55);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+}
+
+.video-modal[hidden] { display: none; }
+
+.video-modal-box {
+    position: relative;
+    width: 100%;
+    max-width: 900px;
+    background: #fff;
+    border-radius: var(--radius-lg);
+    padding: 0.75rem;
+    box-shadow: 0 30px 80px rgba(60, 50, 120, 0.35);
+}
+
+.video-modal-frame {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    border-radius: calc(var(--radius-lg) - 6px);
+    overflow: hidden;
+    background: #000;
+}
+
+.video-modal-frame iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+.video-modal-close {
+    position: absolute;
+    top: -14px;
+    right: -14px;
+    width: 36px;
+    height: 36px;
+    border: none;
+    border-radius: 50%;
+    background: #fff;
+    color: var(--ink);
+    font-size: 1.4rem;
+    line-height: 1;
+    cursor: pointer;
+    box-shadow: 0 6px 16px rgba(60, 50, 120, 0.25);
+    transition: transform 0.2s;
+}
+
+.video-modal-close:hover { transform: scale(1.08); }

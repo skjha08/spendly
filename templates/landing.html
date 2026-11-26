@@ -17,7 +17,7 @@
         </p>
         <div class="hero-actions">
             <a href="{{ url_for('register') }}" class="btn-primary">Start tracking free</a>
-            <a href="#" class="btn-demo">
+            <a href="#" class="btn-demo" id="demo-open" aria-haspopup="dialog">
                 <span class="play-icon">
                     <svg viewBox="0 0 24 24" width="12" height="12" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
                 </span>
@@ -106,4 +106,55 @@
     </div>
 </section>
 
+<div class="video-modal" id="video-modal" role="dialog" aria-modal="true" aria-label="Product demo video" hidden>
+    <div class="video-modal-box">
+        <button type="button" class="video-modal-close" id="video-modal-close" aria-label="Close video">&times;</button>
+        <div class="video-modal-frame">
+            <iframe id="video-modal-iframe"
+                    title="Spendly demo video"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen></iframe>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+(function () {
+    // Placeholder video — replace the ID with your own YouTube video ID.
+    var VIDEO_URL = "https://www.youtube-nocookie.com/embed/jNQXAC9IVRw?autoplay=1&rel=0";
+
+    var modal = document.getElementById("video-modal");
+    var iframe = document.getElementById("video-modal-iframe");
+    var openBtn = document.getElementById("demo-open");
+    var closeBtn = document.getElementById("video-modal-close");
+
+    function openModal(e) {
+        e.preventDefault();
+        iframe.src = VIDEO_URL;
+        modal.hidden = false;
+        document.body.style.overflow = "hidden";
+        closeBtn.focus();
+    }
+
+    function closeModal() {
+        if (modal.hidden) return;
+        modal.hidden = true;
+        iframe.src = "about:blank"; // unloads the player so audio/video stops
+        document.body.style.overflow = "";
+        openBtn.focus();
+    }
+
+    openBtn.addEventListener("click", openModal);
+    closeBtn.addEventListener("click", closeModal);
+    modal.addEventListener("click", function (e) {
+        if (e.target === modal) closeModal(); // click on the dark backdrop
+    });
+    document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape") closeModal();
+    });
+})();
+</script>
 {% endblock %}
